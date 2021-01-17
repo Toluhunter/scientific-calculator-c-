@@ -496,60 +496,60 @@ return equation;
 
 //************************************* Main begins here *************************************
 int main(){
-std::string equation,temp,special,angle,inv;
-bool error;
-int x;
-std::cout<<"Deg or Rad :";
-std::cin>>angle;
-lowercase(angle);
+	std::string equation,temp,special,angle,inv;
+	bool error;
+	int x;
+	std::cout<<"Deg or Rad :";
+	std::cin>>angle;
+	lowercase(angle);
 
-if(angle!="deg"&&angle!="rad"){
-  std::cout<<"Input invalid by default you will be using deg"<<std::endl;
-  angle="deg";
-}
-std::cout<<"Enter Equation :";
-std::cin>>equation;
-lowercase(equation);//converts uppercase to lower for the sin and remaining cos and so on......
-error=check(equation);//sends equation to check function to find errors if error in input returns true
-if(error){//error is fount prints error then exits
-  std::cout<<"Invalid input try again";
-  return 0;
-}
-for(int count=0;count<equation.length();count++){//loop meant to scan through characters in equation
-if(equation[count]==')'){
+	if(angle!="deg"&&angle!="rad"){
+ 		 std::cout<<"Input invalid by default you will be using deg"<<std::endl;
+  		angle="deg";
+	}
+	std::cout<<"Enter Equation :";
+	std::cin>>equation;
+	lowercase(equation);//converts uppercase to lower for the sin and remaining cos and so on......
+	error=check(equation);//sends equation to check function to find errors if error in input returns true
+	if(error){//error is fount prints error then exits
+  		std::cout<<"Invalid input try again";
+  		return 0;
+	}
+	for(int count=0;count<equation.length();count++){//loop meant to scan through characters in equation
+		if(equation[count]==')'){
   
-  equation.erase(equation.begin()+count);//erases closing bracket
-  count--;
+  			equation.erase(equation.begin()+count);//erases closing bracket
+  			count--;
   //int counter;
-  for(count;equation[count]!='('&&count>=0;count--){
-    temp+=equation[count];
-  equation.erase(equation.begin()+count);
-}
-  temp=rev(temp);
+  			for(count;equation[count]!='('&&count>=0;count--){
+    				temp+=equation[count];
+  				equation.erase(equation.begin()+count);
+			}
+  			temp=rev(temp);
 
-temp=solu(temp);//passes values in bracket to be solved by solu function and returns the solution in string
+			temp=solu(temp);//passes values in bracket to be solved by solu function and returns the solution in string
 
-if(equation[count-1]>='0'&&equation[count-1]<='9')
+			if(equation[count-1]>='0'&&equation[count-1]<='9')
 /*
 checks to see if character before opening bracket is a number
 if so adds * to allow multiplication
 4(-2)->4*-2
 */
-temp='*'+temp;
-equation.replace(count,1,temp);//uses position of closing bracket and replaces it with value of calculated temp string
-temp="";//empties temp variable
-}
+			temp='*'+temp;
+			equation.replace(count,1,temp);//uses position of closing bracket and replaces it with value of calculated temp string
+			temp="";//empties temp variable
+		}
 
-}
+	}
 
-for(int counter=0;counter<equation.length();counter++){
-  if(equation[counter]=='s'||equation[counter]=='c'||equation[counter]=='t'||equation[counter]=='a'){
-    special+=equation[counter];
-    int count;
-    for(count=counter+1;equation[count]>='a'&&equation[count]<='z';count++)
-    special+=equation[count];
-    for(count;equation[count]=='.'||equation[count]>='0'&&equation[count]<='9';count++)
-    temp+=equation[count];
+	for(int counter=0;counter<equation.length();counter++){
+  	if(equation[counter]=='s'||equation[counter]=='c'||equation[counter]=='t'||equation[counter]=='a'){
+    	special+=equation[counter];
+    	int count;
+    	for(count=counter+1;equation[count]>='a'&&equation[count]<='z';count++)
+    	special+=equation[count];
+    	for(count;equation[count]=='.'||equation[count]>='0'&&equation[count]<='9';count++)
+    	temp+=equation[count];
     
     if(special=="sin"||special=="cos"||special=="tan"||special=="arcsin"||special=="arccos"||special=="arctan"){
        if(angle=="deg")
